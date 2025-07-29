@@ -1,11 +1,22 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { buttonVariants } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Link from "next/link";
 
-export default function Home() {
+export default async function Page() {
 	return (
-		<div>
-			<Button>Bonsoir</Button>
-			<Input />
-		</div>
+		<Card>
+			<CardHeader>
+				<CardTitle>Welcome</CardTitle>
+			</CardHeader>
+
+			<CardContent className="flex flex-col gap-4">
+				<Link
+					className={buttonVariants({ size: "lg", variant: "outline" })}
+					href="/new"
+				>
+					Create a to-do list
+				</Link>
+			</CardContent>
+		</Card>
 	);
 }

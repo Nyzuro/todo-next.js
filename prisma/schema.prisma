@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
   previewFeatures = ["driverAdapters"]
 }
 
@@ -30,6 +29,7 @@ model Todo {
   updatedAt DateTime @updatedAt
   published Boolean  @default(false)
   title     String
+  task		String
   author    User     @relation(fields: [authorId], references: [id])
   authorId  Int
 }

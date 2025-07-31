@@ -12,7 +12,7 @@ export default async function Page() {
 			<CardContent className="flex flex-col gap-4">
 				<Link
 					className={buttonVariants({ size: "lg", variant: "outline" })}
-					href="/new"
+					href="todos/new"
 				>
 					Create a to-do list
 				</Link>

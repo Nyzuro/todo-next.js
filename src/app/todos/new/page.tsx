@@ -1,9 +1,20 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useFormStatus } from "react-dom";
+import { createTodoAction } from "./todo.action";
 
 export default function Page() {
+	const createTodo = async (FormData: FormData) => {
+		const todoAction = await createTodoAction({
+			title: String(FormData.get("title")),
+			task: String(FormData.get("task")),
+		});
+	};
+
 	return (
 		<Card className="">
 			<CardHeader>
@@ -12,9 +23,9 @@ export default function Page() {
 
 			<CardContent>
 				<form
-					action="/api/to-do"
-					method="post
-					"
+					action={async (FormData) => {
+						await createTodo(FormData);
+					}}
 				>
 					<Label>
 						Title
@@ -24,9 +35,19 @@ export default function Page() {
 						Task
 						<Input name="task" />
 					</Label>
-					<Button type="submit">Submit</Button>
+					<SubmitButton />
 				</form>
 			</CardContent>
 		</Card>
 	);
 }
+
+const SubmitButton = () => {
+	const { pending } = useFormStatus();
+
+	return (
+		<Button disabled={pending} type="submit">
+			{pending ? "Loading..." : "Submit"}
+		</Button>
+	);
+};
